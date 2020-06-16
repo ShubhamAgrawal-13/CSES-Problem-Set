@@ -15,20 +15,18 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-ll power(ll b, ll e)
+ll power(ll b, ll e,int m)
 {
-	if(e==0)
+    if(e==0)
         return 1;
     if(e==1)
-        return b%mod;
+        return b%m;
 
-    ll temp = power(b,e/2);
-    temp=(temp*temp)%mod;
-    if(temp<0)
-        temp+=mod;
+    ll temp = power(b,e/2,m);
+    temp=(temp*temp)%m;
     if(e&1)
-        return (b*temp)%mod;
-    return temp%mod;
+        return (b*temp)%m;
+    return temp%m;
 } 
 
 int main(int argc, char const *argv[])  
@@ -44,13 +42,7 @@ int main(int argc, char const *argv[])
     {  
         ll a,b,c;
         cin>>a>>b>>c;
-        ll p1 = power(b,c);
-        if(p1<0)
-            p1+=mod;
-        p1=power(a,p1);
-        if(p1<0)
-            p1+=mod;
-        cout<<p1<<endl;
+        cout<<power(a,power(b,c,mod-1),mod)<<endl;
     }  
   
     return 0;  
