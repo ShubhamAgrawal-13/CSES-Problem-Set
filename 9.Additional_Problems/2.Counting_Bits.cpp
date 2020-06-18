@@ -16,29 +16,19 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-int mpow(int base, int exp) 
-{
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
+ll bits(ll n){
+    if(n==1 || n==0){
+        return n;
+    }
+    return (bits(n&(n-1))+1)%mod;
 }
 
-int gcd(int a,int b)
-{
-	if(b==0)
-		return a;
-	return gcd(b,a%b);
+void solve(){
+    ll n;
+    cin>>n;
+    cout<<bits(n)<<"\n";
 }
 
-void solve()
-{
-	
-} 
 
 int main(int argc, char const *argv[])  
 {  

@@ -28,16 +28,26 @@ int mpow(int base, int exp)
   return result;
 }
 
-int gcd(int a,int b)
+
+ll fact[MAX];
+void factorial()
 {
-	if(b==0)
-		return a;
-	return gcd(b,a%b);
+    fact[0]=1;
+    fact[1]=1;
+    for(int i=2;i<MAX-1;i++)
+    {
+        fact[i]=(i*fact[i-1])%mod;
+    }
 }
+
 
 void solve()
 {
-	
+	ll n,k;
+    cin>>n>>k;
+
+    ll res=(((fact[n]*mpow(fact[k],mod-2))%mod * mpow(fact[n-k],mod-2))%mod)%mod;
+    cout<<res<<endl;
 } 
 
 int main(int argc, char const *argv[])  
@@ -47,8 +57,8 @@ int main(int argc, char const *argv[])
     cout.tie(0);
   
     int t=1;  
-    //cin>>t;  
-  
+    cin>>t;  
+    factorial();
     while(t--)  
     {  
         solve();

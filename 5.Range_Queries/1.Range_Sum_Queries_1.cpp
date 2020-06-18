@@ -2,7 +2,6 @@
 using namespace std;
 
 #define ll long long 
-#define MAX 1000005
 #define mod 1000000007
 #define deb(x) cout << #x << "=" << x << endl
 #define print(x) cout << x << endl
@@ -16,28 +15,28 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-int mpow(int base, int exp) 
-{
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
-}
-
-int gcd(int a,int b)
-{
-	if(b==0)
-		return a;
-	return gcd(b,a%b);
-}
-
 void solve()
 {
-	
+	int n,q;
+    cin>>n>>q;
+
+    ll a[n+1];
+    for(int i=1;i<=n;i++)
+        cin>>a[i];
+    for(int i=2;i<=n;i++)
+        a[i]=a[i]+a[i-1];
+
+    while(q--)
+    {
+        int x,y;
+        cin>>x>>y;
+        if(x==1)
+            cout<<a[y]<<endl;
+        else
+            cout<<a[y]-a[x-1]<<endl;
+    }
+
+
 } 
 
 int main(int argc, char const *argv[])  
