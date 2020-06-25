@@ -45,7 +45,29 @@ int gcd(int a,int b)
 
 void solve()
 {
-	
+    int n,x;
+    cin>>n>>x;
+
+    int a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+
+    sort(a,a+n,greater<int>());
+    //print_array(a,n);
+    int count=0;
+    for(int i=0,j=n-1; i<=j &&i<n && j>=0 ;){
+        if(a[i]+a[j]<=x){
+            i++;
+            j--;
+            count++;
+        }
+        else{
+            count++;
+            i++;
+        }
+    }
+    cout<<count<<"\n";
 } 
 
 int main(int argc, char const *argv[])  

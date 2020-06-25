@@ -45,7 +45,39 @@ int gcd(int a,int b)
 
 void solve()
 {
-	
+    int n,m,k;
+    cin>>n>>m>>k;
+
+    int a[n], b[m];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+
+    for(int i=0;i<m;i++){
+        cin>>b[i];
+    }
+
+    sort(a,a+n);
+    sort(b,b+m);
+    // print_array(a,n);
+    // print_array(b,m);
+    int j=0;
+    int count=0;
+    for(int i=0;i<n && j<m;){
+        //int x = *lower_bound(b+j,b+m,a[i]);
+        if(abs(a[i]-b[j])<=k){
+            i++;
+            j++;
+            count++;
+        }
+        else if(a[i]>b[j]){
+            j++;
+        }
+        else{
+            i++;
+        }
+    }
+    cout<<count<<"\n";
 } 
 
 int main(int argc, char const *argv[])  

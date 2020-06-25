@@ -24,28 +24,14 @@ void print_array(int array[], int n){
 	cout<<"\n";
 }
 
-int mpow(int base, int exp) 
-{
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
-}
-
-int gcd(int a,int b)
-{
-	if(b==0)
-		return a;
-	return gcd(b,a%b);
-}
-
 void solve()
 {
-	
+    int n,m;
+    cin>>n>>m;
+
+    int dp[n];
+
+    
 } 
 
 int main(int argc, char const *argv[])  

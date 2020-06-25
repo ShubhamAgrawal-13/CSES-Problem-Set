@@ -17,35 +17,40 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
+int dp[MAX];
+
 void print_array(int array[], int n){
-	for(int i=0;i<n;i++){
-		cout<<array[i]<<" ";
-	}
-	cout<<"\n";
-}
-
-int mpow(int base, int exp) 
-{
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
-}
-
-int gcd(int a,int b)
-{
-	if(b==0)
-		return a;
-	return gcd(b,a%b);
+    for(int i=0;i<=n;i++){
+        cout<<array[i]<<" ";
+    }
+    cout<<"\n";
 }
 
 void solve()
 {
-	
+    int n;
+    cin>>n;
+    for(int i=0;i<=n;i++){
+        dp[i]=INF;
+    }
+    dp[0]=0;
+    for(int i=1;i<10;i++){
+        dp[i]=1;
+    }
+
+    for(int i=10;i<=n;i++){
+        int temp=i;
+        int min=INF;
+        while(temp>0){
+            if(min > dp[i-temp%10]){
+                min=dp[i-temp%10];
+            }
+            temp=temp/10;
+        }
+        dp[i]=1+min;
+    }
+    //print_array(dp,n);
+	print(dp[n]);
 } 
 
 int main(int argc, char const *argv[])  

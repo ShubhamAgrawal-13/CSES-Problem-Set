@@ -24,18 +24,6 @@ void print_array(int array[], int n){
 	cout<<"\n";
 }
 
-int mpow(int base, int exp) 
-{
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
-}
-
 int gcd(int a,int b)
 {
 	if(b==0)
@@ -43,9 +31,45 @@ int gcd(int a,int b)
 	return gcd(b,a%b);
 }
 
+int prime[MAX];
+
+void sieve()
+{
+    memset(prime,0,sizeof(prime));
+
+    prime[0]=0;
+    prime[1]=1;
+
+    for (int p=2; p*p<=1000002; p++)
+    {
+        if(prime[p]==0)
+        {
+            //primes.push_back(p);
+            for(int i=p*p; i<=1000002; i+=p)
+            {
+                if(prime[i]==0)
+                    prime[i]=p;
+            }
+        }
+    }
+
+    for (int p=2; p<=1000002; p++)
+    {
+        if(prime[p]==true)
+        {
+            primes.push_back(p);
+            cout<<p<<" ";
+        }
+    }
+    print(primes.size());
+}
+
 void solve()
 {
-	
+    int n;
+    cin>>n;
+
+
 } 
 
 int main(int argc, char const *argv[])  
@@ -55,7 +79,7 @@ int main(int argc, char const *argv[])
     cout.tie(0);
   
     int t=1;  
-    //cin>>t;  
+    cin>>t;  
   
     while(t--)  
     {  
