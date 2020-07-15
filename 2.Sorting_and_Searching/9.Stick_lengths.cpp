@@ -45,7 +45,28 @@ int gcd(int a,int b){
 	return gcd(b,a%b);
 }
 
+
+//Compute median
+
 void solve(){
+
+    int n;
+    cin>>n;
+
+    vector<int> p(n);
+    for (int i = 0; i < n; ++i){
+        cin>>p[i];
+    }
+
+    sortall(p);
+
+    int median = p[n/2];
+    ll sum=0;
+    for(int i=0;i<n;i++){
+        sum+=abs(p[i] - median);
+    }
+    cout<<sum<<"\n";
+
 	
 } 
 

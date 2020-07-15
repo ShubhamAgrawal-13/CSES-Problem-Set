@@ -14,20 +14,35 @@ void build(vector<ll> &a,int node,int lx,int rx){
     int m = (lx+rx)/2;
     build(a,2*node+1,lx,m);
     build(a,2*node+2,m+1,rx);
-    tree[node]=min(tree[2*node+1],tree[2*node+2]);
+    tree[node]=tree[2*node+1]+tree[2*node+2];
+}
+
+void update(int index,int value,int node,int lx,int rx){
+    if(lx==rx)
+    {
+        tree[node]=value;
+        return;
+    }
+
+    int m = (lx+rx)/2;
+    if(index<=m)
+        update(index,value,2*node+1,lx,m);
+    else
+        update(index,value,2*node+2,m+1,rx);
+    tree[node]=tree[2*node+1]+tree[2*node+2];
 }
 
 ll query(int node,int lx,int rx,int l,int r){
     //cout<<"["<<lx<<", "<<rx<<"]\n";
     if(rx<l || r<lx)
-        return INT_MAX;
+        return 0;
     if(l<=lx && rx<=r)
         return tree[node];
 
     int m=(lx+rx)/2;
     ll left = query(2*node+1,lx,m,l,r);
     ll right = query(2*node+2,m+1,rx,l,r);
-    return min(left,right);
+    return left+right;
 }
 
 void print_tree(int node,int lx,int rx,int space){
@@ -59,9 +74,21 @@ int main(){
     build(a,0,0,n-1);
     //print_tree(0,0,n-1,0);
     while(q--){ 
-        int l,r;
-        cin>>l>>r;
-        cout<<query(0,0,n-1,l-1,r-1)<<"\n";
+        int op;
+        cin>>op;
+
+        if(op==1){
+            int i,v;
+            cin>>i>>v;
+            update(i-1,v,0,0,n-1);
+            //cout<<"update\n";
+            //print_tree(0,0,n-1,0);
+        }
+        else{
+            int l,r;
+            cin>>l>>r;
+            cout<<query(0,0,n-1,l-1,r-1)<<"\n";
+        }
     }
     return 0;
 }

@@ -17,7 +17,7 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-#define ar array 
+#define ar array
 
 void print_array(int array[], int n){
 	for(int i=0;i<n;i++){
@@ -45,8 +45,43 @@ int gcd(int a,int b){
 	return gcd(b,a%b);
 }
 
+bool comp(const pair<int,int> &a, const pair<int,int> &b){
+    return a.first < b.first;
+}
+
+// two sum using map
+// taking left and right pointer after sorting
+
 void solve(){
-	
+    int n,x;
+    cin>>n>>x;
+
+    vector<pair<int,int>> v;
+
+    for(int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        v.push_back({a,i});
+    }
+
+    sortall(v);
+
+    for(int i=0;i<n;i++){
+
+        int elt1=v[i].first;
+        int elt2=x-elt1;
+        // deb(elt1);
+        // deb(elt2);
+        int ans = lower_bound(v.begin(), v.end(), make_pair(elt2,0),comp) - v.begin();
+
+        // deb(ans);
+        // deb(i);
+        if(ans!=n && v[ans].first==elt2 && v[ans].second!=v[i].second){
+            cout<<v[i].second+1<<" "<<v[ans].second+1<<"\n";
+            return;
+        }
+    }
+    cout<<"IMPOSSIBLE\n";
 } 
 
 int main(int argc, char const *argv[])  {

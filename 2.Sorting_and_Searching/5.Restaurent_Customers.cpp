@@ -17,7 +17,7 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-#define ar array 
+#define ar array
 
 void print_array(int array[], int n){
 	for(int i=0;i<n;i++){
@@ -45,8 +45,27 @@ int gcd(int a,int b){
 	return gcd(b,a%b);
 }
 
+//merge intervals
+
 void solve(){
-	
+    int n;
+    cin>>n;
+
+    set<ar<int,2>> s;
+
+    for(int i=0;i<n;i++){
+        int a,b;
+        cin>>a>>b;
+        s.insert({a,1});
+        s.insert({b,-1});
+    }
+
+    int ans=0, curr=0;
+    for(ar<int,2> a : s){
+        curr+=a[1];
+        ans=max(ans,curr);
+    }
+	cout<<ans<<"\n";
 } 
 
 int main(int argc, char const *argv[])  {

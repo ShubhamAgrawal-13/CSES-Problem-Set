@@ -17,8 +17,6 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-#define ar array 
-
 void print_array(int array[], int n){
 	for(int i=0;i<n;i++){
 		cout<<array[i]<<" ";
@@ -26,31 +24,40 @@ void print_array(int array[], int n){
 	cout<<"\n";
 }
 
-int mpow(int base, int exp) {
-
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
-}
-
-int gcd(int a,int b){
-
-	if(b==0)
-		return a;
-	return gcd(b,a%b);
-}
 
 void solve(){
-	
+    ll n,x;
+    cin>>n>>x;
+
+    ll a[n];
+    for(int i=0;i<n;i++){
+        cin>>a[i];
+    }
+
+    ll currSum=0;
+    ll minSum=0;
+    map<ll,int> prefixSum;
+    ll count=0;
+    prefixSum[0]=1;
+
+    for(int i=0;i<n;i++){
+        currSum+=a[i];
+        // if(currSum<minSum)
+        //     minSum=currSum;
+
+        if(prefixSum.find(currSum-x)!=prefixSum.end()){
+            count+=prefixSum[currSum-x];
+        }
+
+        prefixSum[currSum]++;
+    }
+
+    print(count);
+
 } 
 
-int main(int argc, char const *argv[])  {
-
+int main(int argc, char const *argv[])  
+{  
     ios_base::sync_with_stdio(false);  
     cin.tie(NULL);  
     cout.tie(0);
@@ -58,7 +65,8 @@ int main(int argc, char const *argv[])  {
     int t=1;  
     //cin>>t;  
   
-    while(t--) {  
+    while(t--)  
+    {  
         solve();
     }  
   

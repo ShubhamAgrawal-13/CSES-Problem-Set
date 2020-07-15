@@ -17,7 +17,7 @@ using namespace std;
 #define sortall(v) sort(all(v))
 #define clr(x) memset(x,0,sizeof(x))
 
-#define ar array 
+#define ar array
 
 void print_array(int array[], int n){
 	for(int i=0;i<n;i++){
@@ -45,8 +45,29 @@ int gcd(int a,int b){
 	return gcd(b,a%b);
 }
 
+//Sort by ending time
 void solve(){
-	
+    int n;
+    cin>>n;
+
+    vector<ar<int,2>> v;
+
+    for(int i=0;i<n;i++){
+        int a,b;
+        cin>>a>>b;
+
+        v.push_back({b,a});
+    }
+    sortall(v);
+    int ans=0, end=0;
+    
+    for(int i=0; i<n; i++){
+        if(v[i][1]>=end){
+            ans++;
+            end=v[i][0];
+        }
+    }
+    cout<<ans<<"\n";
 } 
 
 int main(int argc, char const *argv[])  {

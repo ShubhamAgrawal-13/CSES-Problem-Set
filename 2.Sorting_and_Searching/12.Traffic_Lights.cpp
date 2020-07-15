@@ -46,7 +46,35 @@ int gcd(int a,int b){
 }
 
 void solve(){
-	
+	int x,n;
+    cin>>x>>n;
+
+    set<int> s;
+    s.insert(0);
+    s.insert(x);
+    map<int,int> mp;
+    mp[x]=1;
+
+    for(int i=0;i<n;i++){
+        int a;
+        cin>>a;
+
+        auto it = s.lower_bound(a);
+        int r = *it;
+        --it;
+        int l = *it;
+        --mp[r-l];
+        if(!mp[r-l])
+            mp.erase(r-l);
+        s.insert(a);
+        ++mp[r-a];
+        ++mp[a-l];
+
+        cout<< (--mp.end())->first <<" ";
+    }
+
+    
+
 } 
 
 int main(int argc, char const *argv[])  {
@@ -60,7 +88,7 @@ int main(int argc, char const *argv[])  {
   
     while(t--) {  
         solve();
-    }  
+    }
   
     return 0;  
-} 
+}

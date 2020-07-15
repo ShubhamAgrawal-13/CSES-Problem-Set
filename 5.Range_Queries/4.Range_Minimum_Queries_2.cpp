@@ -17,6 +17,23 @@ void build(vector<ll> &a,int node,int lx,int rx){
     tree[node]=min(tree[2*node+1],tree[2*node+2]);
 }
 
+void update(int index,int value,int node,int lx,int rx){
+    if(lx==rx)
+    {
+        tree[node]=value;
+        return;
+    }
+
+    int m = (lx+rx)/2;
+
+    if(index<=m)
+        update(index,value,2*node+1,lx,m);
+    else
+        update(index,value,2*node+2,m+1,rx);
+
+    tree[node]=min(tree[2*node+1],tree[2*node+2]);
+}
+
 ll query(int node,int lx,int rx,int l,int r){
     //cout<<"["<<lx<<", "<<rx<<"]\n";
     if(rx<l || r<lx)
@@ -59,9 +76,20 @@ int main(){
     build(a,0,0,n-1);
     //print_tree(0,0,n-1,0);
     while(q--){ 
-        int l,r;
-        cin>>l>>r;
-        cout<<query(0,0,n-1,l-1,r-1)<<"\n";
+        int op;
+        cin>>op;
+
+        if(op==1){
+            int i,v;
+            cin>>i>>v;
+            update(i-1,v,0,0,n-1);
+            //print_tree(0,0,n-1,0);
+        }
+        else{
+            int l,r;
+            cin>>l>>r;
+            cout<<query(0,0,n-1,l-1,r-1)<<"\n";
+        }
     }
     return 0;
 }

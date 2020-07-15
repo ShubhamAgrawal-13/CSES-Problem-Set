@@ -14,20 +14,20 @@ void build(vector<ll> &a,int node,int lx,int rx){
     int m = (lx+rx)/2;
     build(a,2*node+1,lx,m);
     build(a,2*node+2,m+1,rx);
-    tree[node]=min(tree[2*node+1],tree[2*node+2]);
+    tree[node]=tree[2*node+1]^tree[2*node+2];
 }
 
 ll query(int node,int lx,int rx,int l,int r){
     //cout<<"["<<lx<<", "<<rx<<"]\n";
     if(rx<l || r<lx)
-        return INT_MAX;
+        return 0;
     if(l<=lx && rx<=r)
         return tree[node];
 
     int m=(lx+rx)/2;
     ll left = query(2*node+1,lx,m,l,r);
     ll right = query(2*node+2,m+1,rx,l,r);
-    return min(left,right);
+    return left^right;
 }
 
 void print_tree(int node,int lx,int rx,int space){

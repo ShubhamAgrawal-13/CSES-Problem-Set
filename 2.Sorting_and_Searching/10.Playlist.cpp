@@ -46,7 +46,30 @@ int gcd(int a,int b){
 }
 
 void solve(){
-	
+    int n;
+    cin>>n;
+
+    vector<int> a(n);
+
+    for (int i = 0; i < n; ++i)
+    {
+        cin>>a[i];
+    }
+
+    map<int,int> m;
+    int ans=1,i=0,j=0;
+    
+    for (i = 0; i < n; ++i){
+        while(j<n && m[a[j]]<1){
+            m[a[j]]++;
+            j++;
+        }
+        ans=max(ans,j-i);
+        // deb(j-i);
+        m[a[i]]--;
+    }
+
+    cout << ans <<endl;
 } 
 
 int main(int argc, char const *argv[])  {
