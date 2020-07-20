@@ -17,7 +17,7 @@ void build(vector<ll> &a,int node,int lx,int rx){
     tree[node]=tree[2*node+1]+tree[2*node+2];
 }
 
-void update(int index,int value,int node,int lx,int rx){
+void update(int index,ll value,int node,int lx,int rx){
     if(lx==rx)
     {
         tree[node]=value;

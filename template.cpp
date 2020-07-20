@@ -5,8 +5,8 @@ using namespace std;
 #define MAX 1000005
 #define INF 999999999
 #define mod 1000000007
-#define deb(x) cout << #x << "=" << x << endl
-#define print(x) cout << x << endl
+#define deb(x) cout << #x << "=" << x << "\n"
+#define print(x) cout << x << "\n"
 
 #define itr(i,v) for(auto i=v.begin();i!=v.end();i++) 
 
