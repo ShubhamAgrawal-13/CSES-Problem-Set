@@ -17,7 +17,8 @@ using namespace std;
 #define clr(x,v) memset(x,v,sizeof(x))
 
 vector<int> a[MAX];
-int color[MAX];
+bool visited[MAX];
+int parent[MAX];
 
 
 void print_graph(int n){
@@ -30,7 +31,39 @@ void print_graph(int n){
 	}
 }
 
-// check if graph is bipartite or not
+bool cyclic(int u,int p){
+	visited[u]=true;
+	parent[u]=p;
+	//deb(u);
+	for(int v : a[u]){
+		if(!visited[v]){
+			if(cyclic(v,u))
+				return true;
+		}
+		else if(v!=p){
+			int u1=u;
+			// deb(u);
+			// deb(v);
+			vector<int> res;
+			while(u^v){
+				res.pb(u);
+				u=parent[u];
+			}
+			res.pb(v);
+			res.pb(u1);
+			cout<<res.size()<<"\n";
+			for(int k : res){
+				cout<<k<<" ";
+			}
+			cout<<"\n";
+			return true;
+		}
+	}
+	return false;
+}
+
+//Detect cycle in an undirected graph
+//https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
 void solve() {
 	int n,m;
 	cin>>n>>m;
@@ -44,46 +77,17 @@ void solve() {
 		a[y].pb(x);
 	}
 
-	//print_graph(a,n);
-	clr(color,-1);
-	
-	//bfs
-	for(int i=1;i<=n;i++){
-		if(color[i]==-1){
-			queue<int> q;
-			color[i]=1;
-			q.push(i);
-
-			while(!q.empty()){
-				int u = q.front();
-				q.pop();
-
-				for(int v : a[u]){
-					if(color[v]==-1){
-						color[v]=1-color[u];
-						q.push(v);
-					}
-					else if(color[u]==color[v]){
-						cout<<"IMPOSSIBLE\n";
-						return;
-					}
-				}
-			}
-		}
-	}
-	
-
-
-	for(int i=1;i<=n;i++){
-		if(color[i]==1){
-			cout<<"1 ";
-		}
-		else{
-			cout<<"2 ";
-		}
-	}
-	
-	cout<<"\n";
+	//print_graph(n);
+	clr(visited,0);
+	clr(parent,-1);
+	//bfs or dfs or set-union
+	//dfs
+	for(int i=1;i<=n;i++)
+		if(!visited[i])
+			if(cyclic(i,-1))
+				return;
+		
+	cout<<"IMPOSSIBLE\n";
 }
 
 int main(int argc, char const *argv[])  

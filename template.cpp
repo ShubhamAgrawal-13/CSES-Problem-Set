@@ -15,7 +15,7 @@ using namespace std;
 
 #define all(v) v.begin(),v.end()
 #define sortall(v) sort(all(v))
-#define clr(x) memset(x,0,sizeof(x))
+#define clr(x,v) memset(x,v,sizeof(x))
 
 #define ar array 
 
