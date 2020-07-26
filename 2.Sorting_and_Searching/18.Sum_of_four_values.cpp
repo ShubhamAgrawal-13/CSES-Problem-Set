@@ -5,6 +5,7 @@ using namespace std;
 #define MAX 1000005
 #define ar array
 
+// mp.reserve(1<<20);
 
 int main(){
 	int n,x;

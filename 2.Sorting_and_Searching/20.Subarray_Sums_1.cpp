@@ -55,6 +55,21 @@ void solve(){
 
 } 
 
+/*
+     Easy code:
+     ll s=0;
+     map<ll,int> mp;
+     mp[0]=1;
+     ll ans=0;
+     for(int i=0;i<n;i++){
+        cin>>a[i];
+        s+=a[i];
+        ans+=mp[s-x];
+        mp[s]++;
+
+     }
+*/
+
 int main(int argc, char const *argv[])  
 {  
     ios_base::sync_with_stdio(false);  
