@@ -47,93 +47,74 @@ void sieve()
     print(primes.size());
 }
 
-// n times O(sqrt(n))
-int factors(ll n)
+int factors(int n)
 {
-    ll sum=0;
-    ll root_n = ceil(sqrt(n));
-
-    for(ll i=1;i*i<=n;i++)
+    int f=0;
+    int root_n = ceil(sqrt(n)); 
+    for(int i=1;i*i<=n;i++)
     {
         if(n%i==0)
         {
             //cout<<i<<" "<<n/i<<" ";
-            sum=(sum+i)%mod;
-            sum=(sum+n/i)%mod;
+            f+=2;
         }
     }
-
     if(root_n*root_n == n)
     {
-        sum-=root_n;
+        f--;
     }
-    return sum;
+    return f;
 }
 
-//Time complexity: O(n)
-//Auxiliary space: O(1)
-
-// void solve(){
-//     ll n;
-//     cin>>n;
-//     //cout<<factors(n)<<endl;
-//     ll sum=0;
-//     for(int i=1;i<=n;i++){
-//         sum=(sum+(n/i)*i)%mod;
-//     }
-//     cout<<sum<<"\n";
-// } 
-
-//O(log(n))
-
-int mpow(int base, int exp) {
-
-  base %= mod;
-  int result = 1;
-  while (exp > 0) {
-    if (exp & 1) result = ((ll)result * base) % mod;
-    base = ((ll)base * base) % mod;
-    exp >>= 1;
-  }
-  return result;
-}
+/*
 
 
-ll sum_n(ll n){
-    ll nn=n;
-    ll nn1=n+1;
-    if(nn&1)
-        nn1=nn1/2;
-    else{
-        nn=nn/2;
+for d = 1..10^5
+  for i = 1..10^5/d
+    sumCnt += cnt[i * d]
+  if (sumCnt >= 2) ans = max(ans, d)
+
+
+*/
+
+//https://www.hackerrank.com/contests/w34/challenges/maximum-gcd-and-sum
+// hacker rank maximum gcd and sum
+//one solutiom is O(n*sqrt(max))
+// this solution is nearly O(n*log(n))
+int find_max_gcd(vector<int> &a, int n){
+    int high = *max_element(all(a));
+    int count[high+1]={0};
+
+    for(int i=0;i<n;i++)
+        count[a[i]]++;
+
+    int counter=0;
+    for(int i=high;i>=1;i--){
+        int j=i;
+        counter=0;
+        while(j<=high){
+            if(count[j]>=2)
+                return j;
+            else if(count[j]==1)
+                counter++;
+
+            j+=i;
+            if(counter==2)
+                return i;
+        }
     }
-    nn%=mod;
-    nn1%=mod;
-    return (nn*nn1)%mod;
+    return -1;
 }
 
-ll range_sum(ll b, ll a){
-    return (sum_n(b) - sum_n(a))%mod;
-}
-
-void solve(){
-    ll n;
+void solve()
+{
+    int n;
     cin>>n;
-    ll result=0;
-
-    ll i=1;
-
-    while(1){
-        ll  temp = range_sum(n/i, n/(i+1));
-        ll  temp2 = ((temp%mod)*(i%mod))%mod;
-        result += temp2;
-        result%=mod;
-        if(i==n)
-            break;
-        i= n/(n/(i+1));
+    vector<int> a(n);
+    for(int i=0;i<n;i++){
+        cin>>a[i];
     }
-
-    cout<<result<<"\n";
+    cout<<find_max_gcd(a,n)<<"\n";
 } 
 
 int main(int argc, char const *argv[])  
@@ -143,7 +124,7 @@ int main(int argc, char const *argv[])
     cout.tie(0);
   
     int t=1;  
-    //cin>>t;  
+    // cin>>t;  
     //sieve();
     while(t--)  
     {  
