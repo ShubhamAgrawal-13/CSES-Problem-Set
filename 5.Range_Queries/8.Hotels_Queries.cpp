@@ -125,3 +125,24 @@ int main(){
     
     return 0;
 }
+
+/*
+int query(int arr[],int v,int l,int r,int value)
+{
+    if(t[v]<value)
+    return 0;
+    if(l==r)
+    {
+        t[v]-=value;
+        return l+1;
+    }
+    int mid=(l+r)/2;
+    int ans;
+    if(t[2*v]>=value)
+    ans=query(arr,2*v,l,mid,value);
+    else
+    ans=query(arr,2*v+1,mid+1,r,value);
+    
+    t[v]=max(t[2*v],t[2*v+1]);
+    return ans;
+}*/

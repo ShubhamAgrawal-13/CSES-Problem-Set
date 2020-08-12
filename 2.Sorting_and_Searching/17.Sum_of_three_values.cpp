@@ -23,7 +23,7 @@ int main(){
 		while(l<r){
 			if(v[l][0]+v[r][0]==x-v[i][0]){
 				cout<<v[i][1]<<" "<<v[l][1]<<" "<<v[r][1]<<"\n";
-				return 0;
+				return 0; //Very Important
 			}
 			else if(v[l][0]+v[r][0]>x-v[i][0]){
 				r--;
